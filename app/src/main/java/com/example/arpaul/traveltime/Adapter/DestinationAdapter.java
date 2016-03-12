@@ -25,6 +25,11 @@ public class DestinationAdapter extends BaseAdapter {
         mTravelDOs = listTravelDOs;
     }
 
+    public void refresh(List<TravelDO> listTravelDOs){
+        mTravelDOs = listTravelDOs;
+        notifyDataSetChanged();
+    }
+
     public void clear() {
         mTravelDOs.clear();
     }
@@ -77,6 +82,6 @@ public class DestinationAdapter extends BaseAdapter {
     }
 
     private String getTitle(int position) {
-        return position >= 0 && position < mTravelDOs.size() ? mTravelDOs.get(position).name : "";
+        return position >= 0 && position < mTravelDOs.size() ? mTravelDOs.get(position).getName() : "";
     }
 }

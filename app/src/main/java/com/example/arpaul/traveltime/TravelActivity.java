@@ -39,6 +39,7 @@ public class TravelActivity extends AppCompatActivity implements DataListener {
     private ArrayList<TravelDO> listTravelDOs;
     private Button btnNavigate;
     private TravelDO objTravelDO;
+    private int spinnerPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,7 @@ public class TravelActivity extends AppCompatActivity implements DataListener {
         showLoader();
 
         if (savedInstanceState != null) {
-            spinner.setSelection(savedInstanceState.getInt("transportModeSpinner", 0));
-            // do this for each of your text views
+            spinnerPosition = savedInstanceState.getInt("transportModeSpinner", 0);
         }
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -101,8 +101,8 @@ public class TravelActivity extends AppCompatActivity implements DataListener {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
         outState.putInt("transportModeSpinner", spinner.getSelectedItemPosition());
     }
 
@@ -114,6 +114,8 @@ public class TravelActivity extends AppCompatActivity implements DataListener {
                 if(Status == TravelWebServices.get_STATUS_SUCCESS()){
                     listTravelDOs = (ArrayList<TravelDO>) data.travels;
                     spinnerAdapter.refresh(listTravelDOs);
+                    if(spinnerPosition > 0)
+                        spinner.setSelection(spinnerPosition);
                     hideLoader();
                 } else
                     hideLoader();

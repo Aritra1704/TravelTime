@@ -3,9 +3,7 @@ package com.example.arpaul.traveltime;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -152,7 +150,9 @@ public class TravelActivity extends AppCompatActivity implements DataListener {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_pager) {
+            Intent intent = new Intent(TravelActivity.this,PagerActivity.class);
+            startActivity(intent);
             return true;
         }
 
